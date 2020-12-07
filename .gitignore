@@ -1,3 +1,4 @@
+
 .Python
 build/
 lib/
@@ -30,3 +31,4 @@ venv.bak/
 
 .idea/
 .idea
+db.sqlite3
