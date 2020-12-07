@@ -4,7 +4,7 @@ WORKDIR code
 COPY ./requirements.txt /code/
 
 RUN apt-get update
-RUN pip install -r /code/requirements
+RUN pip install -r /code/requirements.txt
 
 COPY . .
 

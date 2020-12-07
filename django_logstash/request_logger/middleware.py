@@ -24,7 +24,7 @@ class LogstashLogger:
     def get_request_attrs(request):
         user = getattr(request, 'user', 'no_user')
         method = getattr(request, 'method')
-        path = getattr(request, 'path', None)
+        path = getattr(request, 'path')
 
         return user, method, path
 
