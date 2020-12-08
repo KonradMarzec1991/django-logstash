@@ -17,7 +17,9 @@ class LogstashLogger:
         """Logger handles sending data to logstash"""
         logger = logging.getLogger('logstash')
         logger.setLevel(logging.INFO)
-        logger.addHandler(logstash.TCPLogstashHandler('es', 5959, version=1))
+        logger.addHandler(
+            logstash.TCPLogstashHandler('logstash', 5959, version=1)
+        )
         logger.addHandler(logging.StreamHandler())
         return logger
 

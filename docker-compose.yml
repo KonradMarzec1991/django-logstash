@@ -19,3 +19,6 @@ services:
       - "5959"
     depends_on:
       - es
+      - server
+    volumes:
+    - ./config/pipline.conf:/usr/share/logstash/pipeline/logstash.conf:ro
