@@ -1,10 +1,13 @@
 FROM python:3.8
 
-WORKDIR code
 COPY ./requirements.txt /code/
+COPY ./run.sh /code/
 
 RUN apt-get update
 RUN pip install -r /code/requirements.txt
 
-COPY . .
+COPY ./ /code/
+WORKDIR /code
 
+RUN chmod a+x /code/run.sh
+CMD /code/run.sh
