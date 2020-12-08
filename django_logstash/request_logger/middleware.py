@@ -1,6 +1,7 @@
 """
 Middleware module
 """
+from datetime import datetime
 import logging
 import logstash
 
@@ -22,7 +23,7 @@ class LogstashLogger:
 
     @staticmethod
     def get_request_attrs(request):
-        user = getattr(request, 'user', 'no_user')
+        user = getattr(request, 'user')
         method = getattr(request, 'method')
         path = getattr(request, 'path')
 
@@ -31,5 +32,9 @@ class LogstashLogger:
     def __call__(self, request):
         response = self.get_response(request)
         user, method, path = self.get_request_attrs(request)
-        self.logger.debug(f'{user} {method} {path}')
+
+        time = datetime.utcnow().replace(microsecond=0).isoformat()
+        status = response.status_code
+
+        self.logger.info(f'{time} {user} {method} {path} {status}')
         return response

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 ]
 
 MY_APPS = [
-    'simple_views'
+    'simple_views',
+    'request_logger'
 ]
 
 INSTALLED_APPS += MY_APPS
