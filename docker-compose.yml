@@ -14,6 +14,8 @@ services:
     - "9200:9200"
 
   logstash:
+    environment:
+      - es_index=web
     image: logstash:7.7.0
     ports:
       - "5959"
