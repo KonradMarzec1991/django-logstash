@@ -15,7 +15,7 @@ services:
 
   logstash:
     environment:
-      - es_index=web
+      - ES_WEB=web
     image: logstash:7.7.0
     ports:
       - "5959"
