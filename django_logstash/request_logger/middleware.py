@@ -1,32 +1,21 @@
 """
 Middleware module
 """
-from datetime import datetime
 import logging
-import logstash
+from datetime import datetime
+
+LOG = logging.getLogger('django-logstash')
 
 
 class LogstashLogger:
     """Middleware logger which sends data to ElasticSearch"""
     def __init__(self, get_response):
         self.get_response = get_response
-        self.logger = self.create_logger()
-
-    @staticmethod
-    def create_logger():
-        """Logger handles sending data to logstash"""
-        logger = logging.getLogger('logstash')
-        logger.setLevel(logging.INFO)
-        logger.addHandler(
-            logstash.TCPLogstashHandler('logstash', 5959, version=1)
-        )
-        logger.addHandler(logging.StreamHandler())
-        return logger
 
     @staticmethod
     def get_request_attrs(request):
         user = getattr(request, 'user')
-        method = getattr(request, 'method')
+        method = getattr(request, 'method').upperr()
         path = getattr(request, 'get_full_path')()
         return user, method, path
 
@@ -37,5 +26,5 @@ class LogstashLogger:
         time = datetime.utcnow().replace(microsecond=0).isoformat()
         status = response.status_code
 
-        self.logger.info(f'{time} {user} {method} {path} {status}')
+        LOG.info(f'{time} {user} {method} {path} {status}')
         return response
