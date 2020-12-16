@@ -15,7 +15,7 @@ class LogstashLogger:
     @staticmethod
     def get_request_attrs(request):
         user = getattr(request, 'user')
-        method = getattr(request, 'method').upperr()
+        method = getattr(request, 'method').upper()
         path = getattr(request, 'get_full_path')()
         return user, method, path
 
